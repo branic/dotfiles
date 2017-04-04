@@ -56,7 +56,15 @@ source ~/.profile
 
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
-PS1="\`if [ \$? = 0 ]; then echo \[\e[33\;42m\]\\\^\\\_\\\^\[\e[0m\]; else echo \[\e[36\;44m\]\\\-\\\_\[\e[36\;44m\]\\\-\[\e[0m\]; fi\` \[\e[38;41m\]\u \[\e[0;36;41m\]\j \[\e[1;32;41m\]\!\[\e[01;34;41m\] \W\[\e[0m\] \[\e[30m\]\[\e[00m\]\$ "
+# Use powerline if it is installed
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bash/powerline.sh
+else
+  PS1="\`if [ \$? = 0 ]; then echo \[\e[33\;42m\]\\\^\\\_\\\^\[\e[0m\]; else echo \[\e[36\;44m\]\\\-\\\_\[\e[36\;44m\]\\\-\[\e[0m\]; fi\` \[\e[38;41m\]\u \[\e[0;36;41m\]\j \[\e[1;32;41m\]\!\[\e[01;34;41m\] \W\[\e[0m\] \[\e[30m\]\[\e[00m\]\$ "
+fi
 
 # Alias to wake up second monitor on Lenovo laptop when connected to dock
 alias fixmon="xrandr --output DP2-2 --mode 1024x768 && xrandr --output DP2-2 --auto"
