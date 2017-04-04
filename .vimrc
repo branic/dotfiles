@@ -50,13 +50,13 @@ if has("gui")
     " Size of GVim window
     set lines=45 columns=150
     set mousehide
-    if has("gui_gtk2")
-        set guifont=Consolas\ 13
+    if has("gui_gtk3") || has("gui_gtk2")
+        set guifont=Source\ Code\ Pro\ 11
         "Switch fonts/sizes
-        map <F9> <ESC>:set guifont=Consolas\ 11<CR>
-        map <F10> <ESC>:set guifont=Consolas\ 13<CR>
-        map <F11> <ESC>:set guifont=Consolas\ 14<CR>
-        map <F12> <ESC>:set guifont=Consolas\ 16<CR>
+        map <F9> <ESC>:set guifont=Source\ Code \ Pro\ 11<CR>
+        map <F10> <ESC>:set guifont=Source\ Code \ Pro\ 13<CR>
+        map <F11> <ESC>:set guifont=Source\ Code \ Pro\ 14<CR>
+        map <F12> <ESC>:set guifont=Source\ Code \ Pro\ 16<CR>
     elseif has("gui_win32")
         set guifont=Consolas:h11:cANSI
         "Switch fonts/sizes
@@ -83,6 +83,8 @@ set wrap
 " This is the official Python convention
 " (http://www.python.org/dev/peps/pep-0008/)
 " I didn't find a good reason to not use it everywhere.
+" This can be overridden on a per language basis by placing
+"   the settings in ~/.vim/ftplugin/LANGUAGE.vim (e.g. ruby.vim)
 set shiftwidth=4
 set tabstop=4
 set expandtab
