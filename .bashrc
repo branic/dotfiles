@@ -79,3 +79,5 @@ alias resume='for i in $(virsh list --name --state-paused); do virsh resume $i; 
 # Alias for pretty printing json
 alias json='python -m json.tool'
 
+# Alias for tree to always display hidden files/dirs and ignore .git dir
+alias tree='tree -a -I .git'
