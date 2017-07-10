@@ -27,6 +27,9 @@ nmap <leader>f :find<cr>
 let g:netrw_cygwin = 0
 let g:netrw_scp_cmd = "pscp.exe"
 
+"Set column marker
+set colorcolumn=120
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fileformats
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
