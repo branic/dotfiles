@@ -52,7 +52,7 @@ export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/l
 
 # Add RVM Path for Ruby scripting
 #export PATH=$PATH:$HOME/.rvm/bin
-source ~/.profile
+# source ~/.profile
 
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
