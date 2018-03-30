@@ -1,0 +1,29 @@
+[user]
+#	name = 
+#	email = 
+[diff]
+	tool = meld
+[merge]
+	tool = meld
+[difftool]
+	prompt = False
+[core]
+	pager = less -FiXR
+[pull]
+	rebase = true
+[push]
+	default = simple
+[color]
+	ui  = auto
+	status = auto
+[log]
+	decorate = short
+[color "status"]
+	added = blue
+	updated = cyan
+	changed = yellow
+	untracked = red
+[alias]
+	graph = log --graph --oneline --decorate
+	graph-all = log --graph --oneline --decorate --branches='*'
+
