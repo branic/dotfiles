@@ -223,7 +223,7 @@ set number
 set numberwidth=5
 
 "Turn on relative line numbering
-set relativenumber
+"set relativenumber
 
 "scroll offset, keeps 2 lines above the cursor
 set scrolloff=2
