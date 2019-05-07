@@ -40,6 +40,10 @@ export RSYNC_RSH="ssh"
 export HISTIGNORE="&"
 # 2nd, append each shell's history to my main history file on exit
 shopt -s histappend
+# 3rd force history to be appended to file after every command
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+# 4th keep a lot of history
+HISTSIZE=100000
 
 # dummy-check before destroying a file (after all, i can always use -f )
 alias rm="rm -i"
@@ -52,7 +56,7 @@ export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/l
 
 # Add RVM Path for Ruby scripting
 #export PATH=$PATH:$HOME/.rvm/bin
-source ~/.profile
+# source ~/.profile
 
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
@@ -81,3 +85,9 @@ alias json='python -m json.tool'
 
 # Alias for tree to always display hidden files/dirs and ignore .git dir
 alias tree='tree -a -I .git'
+
+# Alias for Git log display
+alias gitlog='git log --oneline --decorate --graph'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
