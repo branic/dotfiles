@@ -14,6 +14,9 @@ fi
 ## My Customizations
 ####################################################
 
+# Use VI mode
+set -o vi
+
 # keep from going insane when referencing the info pages
 alias info="pinfo"
 alias c="clear"
