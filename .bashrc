@@ -57,10 +57,6 @@ alias cp="cp -i"
 #export PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin
 export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/razer
 
-# Add RVM Path for Ruby scripting
-#export PATH=$PATH:$HOME/.rvm/bin
-# source ~/.profile
-
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
 # Use powerline if it is installed
@@ -91,6 +87,3 @@ alias tree='tree -a -I .git'
 
 # Alias for Git log display
 alias gitlog='git log --oneline --decorate --graph'
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
