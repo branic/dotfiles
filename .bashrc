@@ -41,6 +41,8 @@ export RSYNC_RSH="ssh"
 # history options
 # 1st, don't put successive, duplicate commands in history file
 export HISTIGNORE="&"
+# 1st-a don't save lines beginning with a space or is a duplicate of the previous line
+export HISTCONTROL=ignoreboth
 # 2nd, append each shell's history to my main history file on exit
 shopt -s histappend
 # 3rd force history to be appended to file after every command
@@ -87,3 +89,10 @@ alias tree='tree -a -I .git'
 
 # Alias for Git log display
 alias gitlog='git log --oneline --decorate --graph'
+
+# Set the default ruby
+if [ -n "$(LC_ALL=C type -t chruby)" ];
+then
+    chruby ruby 2.5.3
+fi
+
