@@ -9,6 +9,7 @@
 	prompt = False
 [core]
 	pager = less -FiXR
+	excludesfile = /home/bevans/.gitignore_global
 [pull]
 	rebase = true
 [push]
@@ -26,4 +27,5 @@
 [alias]
 	graph = log --graph --oneline --decorate
 	graph-all = log --graph --oneline --decorate --branches='*'
+        showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
 
