@@ -231,9 +231,9 @@ set scrolloff=2
 let Tlist_Ctags_Cmd = 'c:\ctags\ctags.exe'
 
 let BASH_AuthorName = "Brant Evans"
-let BASH_AuthorRef  = "beva"
-let BASH_Email      = "brant.evans@stratus.com"
-let BASH_Company    = "Stratus Technologies, DE."
+let BASH_AuthorRef  = "bevans"
+let BASH_Email      = "bevans@redhat.com"
+let BASH_Company    = "Red Hat, Inc."
 
 " map control-backspace to delete the previous word
 :imap <C-BS> <C-W>
