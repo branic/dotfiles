@@ -27,5 +27,5 @@
 [alias]
 	graph = log --graph --oneline --decorate
 	graph-all = log --graph --oneline --decorate --branches='*'
-        showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
+	showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
 
