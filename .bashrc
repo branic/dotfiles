@@ -93,6 +93,6 @@ alias gitlog='git log --oneline --decorate --graph'
 # Set the default ruby
 if [ -n "$(LC_ALL=C type -t chruby)" ];
 then
-    chruby ruby 2.5.3
+    chruby ruby-2.5.3
 fi
 
