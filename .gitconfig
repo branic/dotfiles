@@ -1,6 +1,6 @@
 [user]
-#	name = 
-#	email = 
+	name = <YOUR NAME HERE>
+	email = <YOUR EMAIL ADDRESS HERE>
 [diff]
 	tool = meld
 [merge]
@@ -28,4 +28,5 @@
 	graph = log --graph --oneline --decorate
 	graph-all = log --graph --oneline --decorate --branches='*'
 	showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
-
+	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	commend = commit --amend --no-edit
