@@ -2,38 +2,38 @@
 
 source $VIMRUNTIME/mswin.vim
 
-"Get out of VI's compatible mode..
+" Get out of VI's compatible mode..
 set nocompatible
 
-"Sets how many lines of history VIM has to remember
+" Sets how many lines of history VIM has to remember
 set history=400
 
-"Enable filetype plugin
+" Enable filetype plugin
 filetype plugin on
 filetype indent on
 
-"Have the mouse enabled all the time
+" Have the mouse enabled all the time
 set mouse=a
 
-"Set mapleader
+" Set mapleader
 let mapleader = ","
 let g:mapleader = ","
 
-"Fast saving
+" Fast saving
 nmap <leader>w :w!<cr>
 nmap <leader>f :find<cr>
 
-"Enable Remote Editing
+" Enable Remote Editing
 let g:netrw_cygwin = 0
 let g:netrw_scp_cmd = "pscp.exe"
 
-"Set column marker
+" Set column marker
 set colorcolumn=120
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fileformats
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Favorite filetypes
+" Favorite filetypes
 set ffs=unix,dos,mac
 
 nmap <leader>fd :se ff=dos<cr>
@@ -42,32 +42,30 @@ nmap <leader>fu :se ff=unix<cr>
 " Enable syntax highlighting.
 syntax on
 
-"Highlight current
-if has("gui_running")
-  set cursorline
-  hi cursorline guibg=#333333
-  hi CursorColumn guibg=#333333
-endif
+" Highlight current line
+set cursorline
 
-if has("gui")
-    " Size of GVim window
-    set lines=45 columns=150
-    set mousehide
-    if has("gui_gtk3") || has("gui_gtk2")
-        set guifont=Source\ Code\ Pro\ 11
-        "Switch fonts/sizes
-        map <F9> <ESC>:set guifont=Source\ Code \ Pro\ 11<CR>
-        map <F10> <ESC>:set guifont=Source\ Code \ Pro\ 13<CR>
-        map <F11> <ESC>:set guifont=Source\ Code \ Pro\ 14<CR>
-        map <F12> <ESC>:set guifont=Source\ Code \ Pro\ 16<CR>
-    elseif has("gui_win32")
-        set guifont=Consolas:h11:cANSI
-        "Switch fonts/sizes
-        map <F9> <ESC>:set guifont=Consolas:h11:cANSI<CR>
-        map <F10> <ESC>:set guifont=Consolas:h13:cANSI<CR>
-        map <F11> <ESC>:set guifont=Consolas:h14:cANSI<CR>
-        map <F12> <ESC>:set guifont=Consolas:h16:cANSI<CR>
-    endif
+if has("gui_running")
+  " Size of GVim window
+  set lines=45 columns=150
+  hi CursorLine guibg=#333333
+  hi CursorColumn guibg=#333333
+  set mousehide
+  if has("gui_gtk3") || has("gui_gtk2")
+      set guifont=Source\ Code\ Pro\ 11
+      "Switch fonts/sizes
+      map <F9> <ESC>:set guifont=Source\ Code \ Pro\ 11<CR>
+      map <F10> <ESC>:set guifont=Source\ Code \ Pro\ 13<CR>
+      map <F11> <ESC>:set guifont=Source\ Code \ Pro\ 14<CR>
+      map <F12> <ESC>:set guifont=Source\ Code \ Pro\ 16<CR>
+  elseif has("gui_win32")
+      set guifont=Consolas:h11:cANSI
+      "Switch fonts/sizes
+      map <F9> <ESC>:set guifont=Consolas:h11:cANSI<CR>
+      map <F10> <ESC>:set guifont=Consolas:h13:cANSI<CR>
+      map <F11> <ESC>:set guifont=Consolas:h14:cANSI<CR>
+      map <F12> <ESC>:set guifont=Consolas:h16:cANSI<CR>
+  endif
 endif
 
 " Automatically indent when adding a curly bracket, etc.
@@ -79,7 +77,7 @@ set autoindent
 " C-sytle indenting
 set cindent
 
-"Wrap lines
+" Wrap lines
 set wrap
 
 " Tabs should be converted to a group of 4 spaces.
@@ -137,19 +135,19 @@ set wildmenu
 " Show editing mode
 set showmode
 
-"Set backspace
+" Set backspace
 set backspace=eol,start,indent
 
-"Bbackspace and cursor keys wrap to
+" Bbackspace and cursor keys wrap to
 set whichwrap+=<,>,h,l
 
-"show matching bracets
+" show matching bracets
 set showmatch
 
-"Highlight search things
+" Highlight search things
 set hlsearch
 
-"Tab configuration
+" Tab configuration
 map <leader>tn :tabnew %<cr>
 map <leader>te :tabedit 
 map <leader>tc :tabclose<cr>
@@ -170,14 +168,14 @@ vnoremap // y/<C-R>"<CR>"
 " Parenthesis/bracket expanding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-")
+" )
 vnoremap $2 <esc>`>a]<esc>`<i[<esc>
 vnoremap $3 <esc>`>a}<esc>`<i{<esc>
 vnoremap $$ <esc>`>a"<esc>`<i"<esc>
 vnoremap $q <esc>`>a'<esc>`<i'<esc>
 vnoremap $w <esc>`>a"<esc>`<i"<esc>
 
-"Map auto complete of (, ", ', [
+" Map auto complete of (, ", ', [
 inoremap $1 ()<esc>:let leavechar=")"<cr>i
 inoremap $2 []<esc>:let leavechar="]"<cr>i
 inoremap $4 {<esc>o}<esc>:let leavechar="}"<cr>O
@@ -193,14 +191,14 @@ imap <d-l> <esc>:exec "normal f" . leavechar<cr>a
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Abbrevs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"My information
+" My information
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 iab xname Brant Evans
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files and backups
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Turn backup off
+" Turn backup off
 set nobackup
 set nowb
 set noswapfile
@@ -208,24 +206,24 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Enable folding, I find it very useful
+" Enable folding, I find it very useful
 set fen
 set fdl=0
 
-"Remove the Windows ^M
+" Remove the Windows ^M
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-"Remove indenting on empty lines
+" Remove indenting on empty lines
 map <F2> :%s/\s*$//g<cr>:noh<cr>''
 
-"Turn on line numbering
+" Turn on line numbering
 set number
 set numberwidth=5
 
-"Turn on relative line numbering
+" Turn on relative line numbering
 " set relativenumber
 
-"scroll offset, keeps 2 lines above the cursor
+" scroll offset, keeps 2 lines above the cursor
 set scrolloff=2
 
 let Tlist_Ctags_Cmd = 'c:\ctags\ctags.exe'

@@ -33,7 +33,9 @@ export LESS="-FiX"
 #export PAGER="less"
 
 # make sure vim is used for editing stuff
-export EDITOR="vim"
+export EDITOR="gvim -v"
+alias vi="gvim -v"
+alias vim="gvim -v"
 
 # always use ssh for rsync'ing
 export RSYNC_RSH="ssh"
@@ -57,7 +59,7 @@ alias cp="cp -i"
 
 # What I really want my path to be (taken from root's path so I can use sudo without full pathing)
 #export PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin
-export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/razer
+export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/razer:$HOME/.local/bin
 
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
@@ -90,9 +92,24 @@ alias tree='tree -a -I .git'
 # Alias for Git log display
 alias gitlog='git log --oneline --decorate --graph'
 
+# Aliases for URL Encoding and Decoding via pipe or string (encode will also encode slashes)
+# Reference https://unix.stackexchange.com/a/216318
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote(  sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()[0:-1], \"\"))"'
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote(sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()[0:-1]))"'
+
 # Set the default ruby
 if [ -n "$(LC_ALL=C type -t chruby)" ];
 then
     chruby ruby-2.5.3
 fi
 
+function rhcase() {
+    if [ -z "$1" ]; then
+        echo "Usage: rhcase [case_number]";
+        return 1;
+    fi
+
+    URL='https://access.redhat.com/support/cases/#/case/'
+    URL+=$1
+    xdg-open "$URL"
+}
