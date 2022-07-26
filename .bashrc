@@ -113,3 +113,14 @@ function rhcase() {
     URL+=$1
     xdg-open "$URL"
 }
+
+function rhjira() {
+    if [ -z "$1" ]; then
+        echo "Usage: rhjira [issue_number]";
+        return 1;
+    fi
+
+    URL='https://issues.redhat.com/browse/'
+    URL+=${1^^}
+    xdg-open "$URL"
+}
