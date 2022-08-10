@@ -1,6 +1,7 @@
 [user]
 	name = <YOUR NAME HERE>
 	email = <YOUR EMAIL ADDRESS HERE>
+	signingkey = <YOUR GPG SIGNING KEY>
 [diff]
 	tool = meld
 [merge]
@@ -10,6 +11,7 @@
 [core]
 	pager = less -FiXR
 	excludesfile = /home/bevans/.gitignore_global
+	# abbrev = 8
 [pull]
 	rebase = true
 [push]
@@ -30,3 +32,7 @@
 	showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
 	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
 	commend = commit --amend --no-edit
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true

@@ -1,7 +1,24 @@
 {
 	"segments": {
-		"left": [
+		"above": [
 			{
+				"left": [
+					{
+						"function": "powerline.segments.common.vcs.stash",
+						"priority": 50
+					},
+					{
+						"function": "powerline.segments.common.vcs.branch",
+						"priority": 40
+					}
+					
+				],
+				"right": [
+				]
+			}
+		],
+		"left": [
+            {
 				"function": "powerline.segments.shell.mode"
 			},
 			{
@@ -41,14 +58,6 @@
 			}
 		],
 		"right": [
-			{
-				"function": "powerline.segments.common.vcs.stash",
-				"priority": 50
-			},
-			{
-				"function": "powerline.segments.common.vcs.branch",
-				"priority": 40
-			}
 		]
 	}
 }
