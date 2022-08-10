@@ -17,7 +17,7 @@
 [push]
 	default = simple
 [color]
-	ui  = auto
+	ui = auto
 	status = auto
 [log]
 	decorate = short
