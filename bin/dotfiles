@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Retrieve the first argument of the command-line
+command="${1}"
+shift
+
+case "${command}" in
+    "install")
+        package="${1}"
+        printf "Installing package: %s\n" "${package}"
+        (cd "${DOTFILES_LOCATION}/${package}" && ./install.sh)
+        printf "\n\n"
+        ;;
+    *)
+        printf "%s is not supported\n" "${command}"
+        exit 1
+        ;;
+esac
