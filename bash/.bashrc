@@ -113,7 +113,7 @@ else
   # \u - username
   # \j - number of jobs managed by the shell
   # \W - basename of the current working directory
-  PS1="\$(last_status)${ANSI_CYAN_BG} \u \j \W ${ANSI_RESET} \$ "
+  PS1="\$(last_status)${_CYAN_BG} \u \j \W ${_RESET} \$ "
 fi
 
 # Alias to wake up second monitor on Lenovo laptop when connected to dock
