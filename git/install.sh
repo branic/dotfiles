@@ -2,6 +2,10 @@
 
 set -e
 
+# See https://en.wikipedia.org/wiki/ANSI_escape_code
+_YELLOW_FG="\e[38;5;226m"
+_RESET="\e[0m"
+
 if [ ! -f "${HOME}/.gitconfig-local" ]; then
     cp "${DOTFILES_LOCATION}/git/.gitconfig-local" "${HOME}/.gitconfig-local"
 
@@ -18,7 +22,7 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
         read -re gpgsign
         sed -i "s/YOUR_GPG_SIGNING/${gpgsign}/" "${HOME}/.gitconfig-local"
     else
-        echo "Update ~/.gitconfig-local with your username, email address, and git gpg signing key"
+        echo -e "${_YELLOW_FG}Update ~/.gitconfig-local with your username, email address, and git gpg signing key${_RESET}"
     fi
 fi
 
