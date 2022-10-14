@@ -95,7 +95,7 @@ function last_status {
     if [ $? = 0 ]; then
         echo -e "${_GREEN_BG}${_WHITE_FG}${_BOLD} ${HAPPY_FACE} ${_RESET}"
     else
-        echo -e "${_RED_BG}${_ORANGE_FG} ${SAD_FACE} ${_RESET}"
+        echo -e "${_RED_BG}${_WHITE_FG} ${SAD_FACE} ${_RESET}"
     fi
 }
 # Use powerline if it is installed
