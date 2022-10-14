@@ -86,7 +86,7 @@ _YELLOW_BG="\e[43m"
 _GREEN_BG="\e[42m"
 _RED_BG="\e[41m"
 _BLACK_BG="\e[40m"
-_ORANGE_FG="\e[38;5;208m"
+_ORANGE_FG="\e[38;5;214m"
 
 HAPPY_FACE="^_^"
 SAD_FACE="-_-"
