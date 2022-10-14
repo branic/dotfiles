@@ -3,4 +3,4 @@
 set -e
 
 # Link the main vimrc file
-ln -sf "${DOTFILES_LOCATION}/vim/.bashrc" "${HOME}/.bashrc"
+ln -sf "${DOTFILES_LOCATION}/bash/.bashrc" "${HOME}/.bashrc"

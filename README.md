@@ -7,7 +7,7 @@ USE AT YOUR OWN RISK.
 ## Installation
 
 ```bash
-curl -sL https://github.com/branic/dotfiles/blob/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/branic/dotfiles/main/install.sh | bash
 source ~/.bashrc
 ```
 
