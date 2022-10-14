@@ -6,4 +6,5 @@ set -e
 ln -sf "${DOTFILES_LOCATION}/bash/.bashrc" "${HOME}/.bashrc"
 
 # Activate bashrc
+# shellcheck source=/dev/null
 source "${HOME}/.bashrc"
