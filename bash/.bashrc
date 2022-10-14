@@ -92,10 +92,12 @@ HAPPY_FACE="^_^"
 SAD_FACE="-_-"
 
 function last_status {
+    # Need to use \001 and \002 here otherwise line wrapping doesn't work
+    # See https://stackoverflow.com/a/43462720
     if [ $? = 0 ]; then
-        echo -e "${_GREEN_BG}${_WHITE_FG}${_BOLD} ${HAPPY_FACE} ${_RESET}"
+        echo -e "\001${_GREEN_BG}${_WHITE_FG}${_BOLD}\002 ${HAPPY_FACE} \001${_RESET}\002"
     else
-        echo -e "${_RED_BG}${_WHITE_FG} ${SAD_FACE} ${_RESET}"
+        echo -e "\001${_RED_BG}${_WHITE_FG}\002 ${SAD_FACE} \001${_RESET}\002"
     fi
 }
 # Use powerline if it is installed
@@ -113,7 +115,8 @@ else
   # \u - username
   # \j - number of jobs managed by the shell
   # \W - basename of the current working directory
-  PS1="\$(last_status)${_CYAN_BG} \u \j \W ${_RESET} \$ "
+  # \[ and \] can be used here as we are assigning directly to PS1
+  PS1="\$(last_status)\[${_CYAN_BG}\] \u \j \W \[${_RESET}\] \$ "
 fi
 
 # Alias to wake up second monitor on Lenovo laptop when connected to dock
