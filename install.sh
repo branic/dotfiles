@@ -21,7 +21,7 @@ if [ -d "${DOTFILES_LOCATION}/.git" ]; then
   git pull --quiet --rebase origin main || exit 1
 else
   echo "Checking out dotfiles using git..."
-  rm -rf "$DOTFILES_LOCATION"
+  rm -rf "${DOTFILES_LOCATION}"
   git clone --quiet --depth=1 "${REPOURL}" "${DOTFILES_LOCATION}"
 fi
 

@@ -66,40 +66,44 @@ export PATH=$PATH:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/sbin:/usr/l
 # Set shell prompt
 # Default is PS1=[\u@\h \W]\$
 
-# Define some colors
-ANSI_BOLD="\e[1m"
-ANSI_RESET="\e[0m"
-ANSI_WHITE_FG="\e[37m"
-ANSI_CYAN_FG="\e[36m"
-ANSI_MAGENTA_FG="\e[35m"
-ANSI_BLUE_FG="\e[34m"
-ANSI_YELLOW_FG="\e[33m"
-ANSI_GREEN_FG="\e[32m"
-ANSI_RED_FG="\e[31m"
-ANSI_BLACK_FG="\e[30m"
-ANSI_WHITE_BG="\e[47m"
-ANSI_CYAN_BG="\e[46m"
-ANSI_MAGENTA_BG="\e[45m"
-ANSI_BLUE_BG="\e[44m"
-ANSI_YELLOW_BG="\e[43m"
-ANSI_GREEN_BG="\e[42m"
-ANSI_RED_BG="\e[41m"
-ANSI_BLACK_BG="\e[40m"
+# Define ansi color sequences
+# See https://en.wikipedia.org/wiki/ANSI_escape_code
+_BOLD="\e[1m"
+_RESET="\e[0m"
+_WHITE_FG="\e[37m"
+_CYAN_FG="\e[36m"
+_MAGENTA_FG="\e[35m"
+_BLUE_FG="\e[34m"
+_YELLOW_FG="\e[33m"
+_GREEN_FG="\e[32m"
+_RED_FG="\e[31m"
+_BLACK_FG="\e[30m"
+_WHITE_BG="\e[47m"
+_CYAN_BG="\e[46m"
+_MAGENTA_BG="\e[45m"
+_BLUE_BG="\e[44m"
+_YELLOW_BG="\e[43m"
+_GREEN_BG="\e[42m"
+_RED_BG="\e[41m"
+_BLACK_BG="\e[40m"
+_ORANGE_FG="\e[38;5;208m"
 
 HAPPY_FACE="^_^"
 SAD_FACE="-_-"
 
 function last_status {
     if [ $? = 0 ]; then
-        echo -e "${ANSI_GREEN_BG}${ANSI_WHITE_FG}${ANSI_BOLD} ${HAPPY_FACE} ${ANSI_RESET}"
+        echo -e "${_GREEN_BG}${_WHITE_FG}${_BOLD} ${HAPPY_FACE} ${_RESET}"
     else
-        echo -e "${ANSI_RED_BG}${ANSI_WHITE_FG}${ANSI_BOLD} ${SAD_FACE} ${ANSI_RESET}"
+        echo -e "${_RED_BG}${_ORANGE_FG} ${SAD_FACE} ${_RESET}"
     fi
 }
 # Use powerline if it is installed
 if [ -f "$(which powerline-daemon 2>/dev/null)" ]; then
   powerline-daemon -q
+  # shellcheck disable=SC2034
   POWERLINE_BASH_CONTINUATION=1
+  # shellcheck disable=SC2034
   POWERLINE_BASH_SELECT=1
   # shellcheck source=/dev/null
   . /usr/share/powerline/bash/powerline.sh
