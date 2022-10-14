@@ -8,6 +8,7 @@ USE AT YOUR OWN RISK.
 
 ```bash
 curl -sL https://raw.githubusercontent.com/branic/dotfiles/main/install.sh | bash
+source "${HOME}/.bashrc"
 ```
 
 ## Inspiration
