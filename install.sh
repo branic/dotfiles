@@ -32,5 +32,6 @@ cd "${DOTFILES_LOCATION}"
 
 ./bin/dotfiles install vim
 ./bin/dotfiles install bash
+./bin/dotfiles install git
 
 } # This ensures the entire script is downloaded

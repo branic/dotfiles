@@ -1,7 +1,5 @@
-[user]
-	name = <YOUR NAME HERE>
-	email = <YOUR EMAIL ADDRESS HERE>
-	signingkey = <YOUR GPG SIGNING KEY>
+[include]
+	path = ~/.gitconfig-local
 [diff]
 	tool = meld
 [merge]
@@ -10,12 +8,14 @@
 	prompt = False
 [core]
 	pager = less -FiXR
-	excludesfile = /home/bevans/.gitignore_global
+	excludesfile = ~/.gitignore-global
 	# abbrev = 8
 [pull]
 	rebase = true
 [push]
 	default = simple
+[fetch]
+	prune = true
 [color]
 	ui = auto
 	status = auto
