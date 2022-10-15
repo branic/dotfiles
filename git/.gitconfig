@@ -5,7 +5,7 @@
 [merge]
 	tool = meld
 [difftool]
-	prompt = False
+	prompt = false
 [core]
 	pager = less -FiXR
 	excludesfile = ~/.gitignore-global
@@ -35,5 +35,3 @@
 	st = status
 [init]
 	defaultBranch = main
-[commit]
-	gpgsign = true
