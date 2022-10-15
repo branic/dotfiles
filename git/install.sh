@@ -16,29 +16,31 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
 fi
 
 # Replace local config values
-if [[ $- == *i* ]]; then
-    echo -n "Enter your full name: "
-    read -re name
+echo -n "Enter your full name: "
+read -re name
 
-    if [[ -n "${name}" ]]; then
-        sed -iE -e "/name = /s|[# ]*(name = ).*|\1${name}|" "${HOME}/.gitconfig-local"
-    fi
+retVal=$?
 
-    echo -n "Enter your email address: "
-    read -re email
-
-    if [[ -n "${email}" ]]; then
-        sed -iE -e "/email = /s|[# ]*(email = ).*|\1${email}|" "${HOME}/.gitconfig-local"
-    fi
-
-    echo -n "Enter your signing key: "
-    read -re gpgsignkey
-
-    if [[ -n "${gpgsignkey}" ]]; then
-        sed -iE -e "/signingkey = /s|[# ]*(signingkey = ).*|\1${gpgsignkey}|" "${HOME}/.gitconfig-local"
-
-        sed -iE -e '/gpgsign = /s|false$|true|' "${HOME}/.gitconfig-local"
-    fi
-else
+if [ $retVal -ne 0 ]; then
     echo -e "${_YELLOW_FG}Update ~/.gitconfig-local with your username, email address, and gpg signing key${_RESET}"
+fi
+
+if [[ -n "${name}" ]]; then
+    sed -iE -e "/name = /s|[# ]*(name = ).*|\1${name}|" "${HOME}/.gitconfig-local"
+fi
+
+echo -n "Enter your email address: "
+read -re email
+
+if [[ -n "${email}" ]]; then
+    sed -iE -e "/email = /s|[# ]*(email = ).*|\1${email}|" "${HOME}/.gitconfig-local"
+fi
+
+echo -n "Enter your signing key: "
+read -re gpgsignkey
+
+if [[ -n "${gpgsignkey}" ]]; then
+    sed -iE -e "/signingkey = /s|[# ]*(signingkey = ).*|\1${gpgsignkey}|" "${HOME}/.gitconfig-local"
+
+    sed -iE -e '/gpgsign = /s|false$|true|' "${HOME}/.gitconfig-local"
 fi
