@@ -1,5 +1,5 @@
 [user]
-	useConfigOnly true
+	useConfigOnly = true
 	# name = YOUR_NAME
 	# email = YOUR_EMAIL_ADDRESS
 	# signingkey = YOUR_GPG_SIGNING
