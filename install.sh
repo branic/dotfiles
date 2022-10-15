@@ -31,7 +31,7 @@
   # Example: ./bin/dotfiles install <config type>
 
   ./bin/dotfiles install vim
-  ./bin/dotfiles install bash
   ./bin/dotfiles install git
+  ./bin/dotfiles install bash
 
 } # This ensures the entire script is downloaded
