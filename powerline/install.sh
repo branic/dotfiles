@@ -3,7 +3,7 @@
 set -e
 
 # Create directories
-mkdir -p "${HOME}/.config/powerline/{colorschemes,themes}/shell"
+mkdir -p "${HOME}/.config/powerline/"{colorschemes,themes}"/shell"
 
 
 # Link the powerline config files
