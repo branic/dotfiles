@@ -35,5 +35,6 @@
   ./bin/dotfiles install bash
   ./bin/dotfiles install tmux
   ./bin/dotfiles install powerline
+  ./bin/dotfiles install terminator
 
 } # This ensures the entire script is downloaded
