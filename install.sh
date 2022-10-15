@@ -33,5 +33,7 @@
   ./bin/dotfiles install vim
   ./bin/dotfiles install git
   ./bin/dotfiles install bash
+  ./bin/dotfiles install tmux
+  ./bin/dotfiles install powerline
 
 } # This ensures the entire script is downloaded
