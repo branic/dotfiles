@@ -7,10 +7,9 @@ USE AT YOUR OWN RISK.
 ## Installation
 
 ```bash
-curl -sL -o install.sh https://raw.githubusercontent.com/branic/dotfiles/main/install.sh
-chmod u+x install.sh
-./install.sh
-source "${HOME}/.bashrc"
+git clone https://github.com/branic/dotfiles.git
+./dotfiles/install.sh
+source ~/.bashrc
 ```
 
 ## Inspiration
