@@ -10,7 +10,10 @@ case "${command}" in
 "install")
     package="${1}"
     printf "Installing package: %s\n" "${package}"
-    (cd "${DOTFILES_LOCATION}/${package}" && ./install.sh)
+    if cd "${DOTFILES_LOCATION}/${package}"; then
+        install.sh
+        cd "${OLDPWD}"
+    fi
     ;;
 *)
     printf "%s is not supported\n" "${command}"
