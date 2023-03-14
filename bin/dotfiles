@@ -9,7 +9,7 @@ shift
 case "${command}" in
 "install")
     package="${1}"
-    printf "Installing package: %s\n" "${package}"
+    printf "Installing configurations for: %s\n" "${package}"
     (cd "${DOTFILES_LOCATION}/${package}" && ./install.sh)
     ;;
 *)

@@ -14,8 +14,21 @@ ln -sf "${DOTFILES_LOCATION}/git/.gitignore-global" "${HOME}/.gitignore-global"
 if [ ! -f "${HOME}/.gitconfig-local" ]; then
     cp "${DOTFILES_LOCATION}/git/.gitconfig-local" "${HOME}/.gitconfig-local"
 
+    # Determine default author name
+    if [ "$(uname -s)" == "Darwin" ]; then
+        git_authorname=$(dscl . -read /Users/$(whoami) RealName | tail -n1)
+    elif [ "$(uname -s)" == "Linux" ]; then
+        git_authorname=$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)
+    fi
+
+    # Remove leading and trailing whitespace
+    shopt -s extglob
+    git_authorname="${git_authorname##*( )}"
+    git_authorname="${git_authorname%%*( )}"
+    shopt -u extglob
+
     # Replace local config values
-    echo -n "Enter your full name: "
+    echo -n "Enter your full name (Default: ${git_authorname}) : "
     read -re name
 
     retVal=$?
@@ -25,9 +38,17 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
     fi
 
     if [[ -n "${name}" ]]; then
-        sed -i -E -e "/name = /s|[# ]*(name = ).*$|\1${name}|" "${HOME}/.gitconfig-local"
+        # Remove leading and trailing whitespace
+        shopt -s extglob
+        name="${name##*( )}"
+        name="${name%%*( )}"
+        shopt -u extglob
+
+        sed -i.bak -E "/name = /s|[# ]*(name = ).*$|\1${name}|" "${HOME}/.gitconfig-local"
     else
-        echo ""
+        if [[ -n "${git_authorname}" ]]; then
+            sed -i.bak -E "/name = /s|[# ]*(name = ).*$|\1${git_authorname}|" "${HOME}/.gitconfig-local"
+        fi
     fi
 
     echo -n "Enter your email address: "
@@ -40,7 +61,7 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
     fi
 
     if [[ -n "${email}" ]]; then
-        sed -i -E -e "/email = /s|[# ]*(email = ).*$|\1${email}|" "${HOME}/.gitconfig-local"
+        sed -i.bak -E "/email = /s|[# ]*(email = ).*$|\1${email}|" "${HOME}/.gitconfig-local"
     else
         echo ""
     fi
@@ -55,11 +76,12 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
     fi
 
     if [[ -n "${gpgsignkey}" ]]; then
-        sed -i -E -e "/signingkey = /s|[# ]*(signingkey = ).*$|\1${gpgsignkey}|" "${HOME}/.gitconfig-local"
+        sed -i.bak -E "/signingkey = /s|[# ]*(signingkey = ).*$|\1${gpgsignkey}|" "${HOME}/.gitconfig-local"
 
-        sed -i -E -e '/gpgsign = /s|false$|true|' "${HOME}/.gitconfig-local"
+        sed -i.bak -E '/gpgsign = /s|false$|true|' "${HOME}/.gitconfig-local"
     else
         echo ""
     fi
 
+    rm -f "${HOME}/.gitconfig-local.bak"
 fi

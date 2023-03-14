@@ -7,8 +7,8 @@ USE AT YOUR OWN RISK.
 ## Installation
 
 ```bash
-git clone https://github.com/branic/dotfiles.git
-./dotfiles/install.sh
+git clone https://github.com/branic/dotfiles.git ~/.dotfiles
+./.dotfiles/install.sh
 source ~/.bashrc
 ```
 
