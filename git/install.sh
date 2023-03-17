@@ -16,9 +16,9 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
 
     # Determine default author name
     if [ "$(uname -s)" == "Darwin" ]; then
-        git_authorname=$(dscl . -read /Users/$(whoami) RealName | tail -n1)
+        git_authorname=$(dscl . -read /Users/"$(whoami)" RealName | tail -n1)
     elif [ "$(uname -s)" == "Linux" ]; then
-        git_authorname=$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)
+        git_authorname=$(getent passwd "$(whoami)" | cut -d ':' -f 5 | cut -d ',' -f 1)
     fi
 
     # Remove leading and trailing whitespace
