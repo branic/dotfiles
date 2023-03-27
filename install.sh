@@ -3,11 +3,13 @@
 
   set -eo pipefail
 
-  DOTFILES_LOCATION="${HOME}/.dotfiles"
+  DOTFILES_LOCATION="${DOTFILES_LOCATION:-${HOME}/.dotfiles}"
   # bindir="${HOME}/.local/bin"
   REPOURL="https://github.com/branic/dotfiles.git"
 
   export DOTFILES_LOCATION
+
+  echo "Dotfiles location set to ${DOTFILES_LOCATION}"
 
   # Ensure Git is installed
   if ! which git >/dev/null; then
@@ -30,11 +32,25 @@
   # Install configurations
   # Example: ./bin/dotfiles install <config type>
 
+  # Configs common to Linux and MacOS
+  echo "Installing common (Linux/MacOS) configs..."
   ./bin/dotfiles install vim
   ./bin/dotfiles install git
   ./bin/dotfiles install bash
-  ./bin/dotfiles install tmux
-  ./bin/dotfiles install powerline
-  ./bin/dotfiles install terminator
+  ./bin/dotfiles install omz
+
+  # Configs specific to Linux
+  if [ "$(uname -s)" == "Linux" ]; then
+    echo "Installing Linux specific configs..."
+    ./bin/dotfiles install tmux
+    ./bin/dotfiles install powerline
+    ./bin/dotfiles install terminator
+  fi
+
+  # Configs specific to MacOS
+  if [ "$(uname -s)" == "Darwin" ]; then
+    echo "Installing MacOS specific configs..."
+    ./bin/dotfiles install brew
+  fi
 
 } # This ensures the entire script is downloaded
