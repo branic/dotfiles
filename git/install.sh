@@ -6,11 +6,7 @@ set -e
 _YELLOW_FG="\e[38;5;226m"
 _RESET="\e[0m"
 
-# Link the main vimrc file
-ln -sf "${DOTFILES_LOCATION}/git/.gitconfig" "${HOME}/.gitconfig"
-ln -sf "${DOTFILES_LOCATION}/git/.gitignore-global" "${HOME}/.gitignore-global"
-
-# Copy local only file
+# Setup the local only config file
 if [ ! -f "${HOME}/.gitconfig-local" ]; then
     cp "${DOTFILES_LOCATION}/git/.gitconfig-local" "${HOME}/.gitconfig-local"
 
@@ -49,6 +45,7 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
         if [[ -n "${git_authorname}" ]]; then
             sed -i.bak -E "/name = /s|[# ]*(name = ).*$|\1${git_authorname}|" "${HOME}/.gitconfig-local"
         fi
+        echo
     fi
 
     echo -n "Enter your email address: "
@@ -85,3 +82,7 @@ if [ ! -f "${HOME}/.gitconfig-local" ]; then
 
     rm -f "${HOME}/.gitconfig-local.bak"
 fi
+
+# Link the git config files
+ln -sf "${DOTFILES_LOCATION}/git/.gitconfig" "${HOME}/.gitconfig"
+ln -sf "${DOTFILES_LOCATION}/git/.gitignore-global" "${HOME}/.gitignore-global"
