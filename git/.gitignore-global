@@ -5,3 +5,5 @@
 *.orig
 t.rb
 t.yml
+t.sh
+
