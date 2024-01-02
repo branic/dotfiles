@@ -24,7 +24,6 @@ alias info="pinfo"
 alias c="clear"
 
 # see what i'm looking for
-export GREP_COLOR="35"
 alias grep="grep --color"
 
 # FiX up less
