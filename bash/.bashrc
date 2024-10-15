@@ -24,6 +24,8 @@ alias info="pinfo"
 alias c="clear"
 
 # see what i'm looking for
+# export GREP_COLOR="35"  ## Depricated version
+export GREP_COLORS='mt=35'
 alias grep="grep --color"
 
 # FiX up less
@@ -161,6 +163,12 @@ alias gitlog='git log --oneline --decorate --graph'
 # Reference https://unix.stackexchange.com/a/216318
 alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote(  sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()[0:-1], \"\"))"'
 alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote(sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()[0:-1]))"'
+
+# Alias to use temporary kubeconfig
+alias tmpkube='export KUBECONFIG=$(mktemp)'
+
+# Display a file without comments
+alias decomment='grep -Ev "^[[:space:]]*((#|;|//).*)?$" '
 
 # Set the default ruby
 if [ -n "$(LC_ALL=C type -t chruby)" ];
