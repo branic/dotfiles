@@ -14,6 +14,7 @@
 	rebase = true
 [push]
 	default = simple
+	autoSetupRemote = true
 [fetch]
 	prune = true
 [color]
@@ -27,15 +28,28 @@
 	changed = yellow
 	untracked = red
 [alias]
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	tree = log --pretty=oneline --abbrev-commit --graph --decorate
 	graph = log --graph --oneline --decorate
 	graph-all = log --graph --oneline --decorate --branches='*'
 	showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
-	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	pr-origin = "!f(){ git checkout $(git remote show origin | grep 'HEAD branch' | awk '{print $3}') ; git branch -D pull/${1} ; git fetch origin pull/${1}/head:pull/${1} ; git checkout pull/${1}; }; f"
+	pr = "!f(){ git checkout $(git remote show upstream | grep 'HEAD branch' | awk '{print $3}') ; git branch -D pull/${1} ; git fetch upstream pull/${1}/head:pull/${1} ; git checkout pull/${1}; }; f"
+	mr = "!f(){ git checkout $(git remote show upstream | grep 'HEAD branch' | awk '{print $3}') ; git branch -D merge/${1} ; git fetch upstream merge-requests/${1}/head:merge/${1} ; git checkout merge/${1}; }; f" 
+	# mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
 	commend = commit --amend --no-edit
 	st = status
-    co = checkout
+	co = checkout
 [init]
 	defaultBranch = main
+	templateDir = ~/.git-template
+[commit]
+	gpgsign = true
 [pager]
-    stash = false
-
+	stash = false
+[grep]
+	lineNumber = true
+	extendedRegexp = true
+[rh-pre-commit]
+	checkSecrets = true
+	enableLocalConfig = true

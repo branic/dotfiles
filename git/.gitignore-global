@@ -1,9 +1,11 @@
 .idea/
+.rubocop-http*
 .vscode/
 .DS_Store
-.rubocop-http*
 *.orig
 t.rb
 t.yml
 t.sh
+pipelinerun-test.yaml
+job-test.yaml
 
