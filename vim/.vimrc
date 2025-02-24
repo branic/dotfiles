@@ -267,3 +267,15 @@ nnoremap <Leader>p :set invpaste<CR>
 
 " json beautifier (requires jq to be installed)
 nnoremap <Leader>z :%!jq '.'<CR>
+
+function! ToggleWhitespace()
+    setlocal lcs=tab:>-,trail:-,eol:$ list! list?
+    if &list
+        match ErrorMsg /\s\+$/
+    else
+        match none
+    endif
+endfunction
+
+nnoremap <F2> :call ToggleWhitespace()<CR>
+
