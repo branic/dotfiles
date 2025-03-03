@@ -40,6 +40,7 @@
 	tree = log --pretty=oneline --abbrev-commit --graph --decorate
 	graph = log --graph --oneline --decorate
 	graph-all = log --graph --oneline --decorate --branches='*'
+    logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
 	pr-origin = "!f(){ git checkout $(git remote show origin | grep 'HEAD branch' | awk '{print $3}') ; git branch -D pull/${1} ; git fetch origin pull/${1}/head:pull/${1} ; git checkout pull/${1}; }; f"
 	pr = "!f(){ git checkout $(git remote show upstream | grep 'HEAD branch' | awk '{print $3}') ; git branch -D pull/${1} ; git fetch upstream pull/${1}/head:pull/${1} ; git checkout pull/${1}; }; f"
