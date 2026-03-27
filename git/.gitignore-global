@@ -1,6 +1,6 @@
 .idea/
 .rubocop-http*
-.vscode/
+.mypy_cache/
 .DS_Store
 *.orig
 t.rb
@@ -8,4 +8,4 @@ t.yml
 t.sh
 pipelinerun-test.yaml
 job-test.yaml
-
+.ansible/

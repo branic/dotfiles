@@ -1,28 +1,41 @@
 [global_config]
   focus = system
   geometry_hinting = True
+  inactive_color_offset = 0.803030303030303
   enabled_plugins = TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, Logger, LaunchpadBugURLHandler
-  title_font = Cantarell 16
 [keybindings]
 [profiles]
   [[default]]
     visible_bell = True
-    background_color = "#002b36"
-    cursor_color = "#aaaaaa"
+    background_color = "#3d3846"
     font = Meslo LG M DZ for Powerline Italic 11
-    foreground_color = "#839496"
+    foreground_color = "#ebdbb2"
     scrollback_lines = 50000
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
     login_shell = True
     use_system_font = False
+    title_transmit_bg_color = "#26a269"
   [[big font]]
-    background_color = "#002b36"
-    cursor_color = "#aaaaaa"
-    font = Meslo LG M DZ for Powerline Italic 18
-    foreground_color = "#839496"
+    background_color = "#282828"
+    cursor_blink = False
+    cursor_shape = underline
+    font = Meslo LG M DZ for Powerline Italic 22
+    foreground_color = "#ebdbb2"
+    show_titlebar = False
     scrollback_lines = 50000
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
     use_system_font = False
+  [[purple]]
+    visible_bell = True
+    background_color = "#3d3846"
+    font = Meslo LG M DZ for Powerline Italic 11
+    foreground_color = "#ebdbb2"
+    scrollback_lines = 50000
+    palette = "#282828:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#a89984:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#ebdbb2"
+    login_shell = True
+    use_system_font = False
+    title_transmit_bg_color = "#613583"
+    title_inactive_bg_color = "#dc8add"
 [layouts]
   [[default]]
     [[[child1]]]
@@ -32,5 +45,5 @@
     [[[window0]]]
       parent = ""
       type = Window
-      size = 1280, 760
+      size = 1460, 760
 [plugins]

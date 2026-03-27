@@ -170,14 +170,15 @@ alias tmpkube='export KUBECONFIG=$(mktemp)'
 # Display a file without comments
 alias decomment='grep -Ev "^[[:space:]]*((#|;|//).*)?$" '
 
-# Update all container images
-alias update_images='for i in `podman images --filter reference!=localhost/* --filter dangling=false --noheading --format "{{.Repository}}:{{.Tag}}"`; do echo "Pulling image:  ${i}"; podman pull -q ${i}; echo "Cleaning up dangling images"; podman image prune --filter dangling=true --force >/dev/null; done'
-
-# Set the default ruby
-if [ -n "$(LC_ALL=C type -t chruby)" ];
-then
-    chruby ruby-2.5.3
-fi
+# Update all remote container images
+function update-images() {
+    for i in $(SUPPRESS_BOLTDB_WARNING=1 podman images --filter reference!=localhost/* --filter dangling=false --noheading --format "{{.Repository}}:{{.Tag}}"); do
+        echo "Pulling image:  ${i}"
+        SUPPRESS_BOLTDB_WARNING=1 podman image pull --quiet --policy=newer ${i} >/dev/null
+        echo "  Cleaning up dangling images"
+        SUPPRESS_BOLTDB_WARNING=1 podman image prune --filter dangling=true --force >/dev/null
+    done
+}
 
 function rhcase() {
     if [ -z "$1" ]; then
@@ -212,7 +213,8 @@ function awsenv() {
         then
             echo "Usage: awsenv [aws_profile_name]";
             echo ""
-            echo "If aws_profile_name is not provided the value of AWS_PROFILE will be used."
+            echo "If aws_profile_name is not provided the value of the environment"
+            echo "  variable AWS_PROFILE will be used."
             echo "If AWS_PROFILE is not set a value of 'default' is used."
             echo ""
             # See https://www.baeldung.com/linux/join-multiple-lines#sed
@@ -220,7 +222,13 @@ function awsenv() {
             local avail_profiles
             avail_profiles="$( grep -E '^\[.+\]' ~/.aws/credentials | sed 's/[][]//g' | sed ':a; N; $!ba; s/\n/, /g' )"
             echo "Configured AWS Profiles are: ${avail_profiles}"
-            return 1;
+            return 0;
+    elif [ "$1" = "-l" ]
+        then
+            local avail_profiles
+            avail_profiles="$( grep -E '^\[.+\]' ~/.aws/credentials | sed 's/[][]//g' | sed ':a; N; $!ba; s/\n/, /g' )"
+            echo "Configured AWS Profiles are: ${avail_profiles}"
+            return 0;
     fi
 
     if [ $# -eq 0 ]
@@ -229,8 +237,8 @@ function awsenv() {
                 then
                     AWS_CRED="$AWS_PROFILE"
             fi
-        else
-            AWS_CRED=$1
+    else
+        AWS_CRED=$1
     fi
 
     echo "Setting credentials for profile : ${AWS_CRED}"
@@ -243,10 +251,10 @@ function awsenv() {
                                                 gsub("[[:space:]]", "", $1);
                                                 gsub("[[:space:]]", "", $2);
                                                 if (tolower($1) == "aws_access_key_id") {
-                                                    print "AWS_ACCESS_KEY_ID=" $2
+                                                    print "export AWS_ACCESS_KEY_ID=" $2
                                                 };
                                                 if (tolower($1) == "aws_secret_access_key") {
-                                                    print "AWS_SECRET_ACCESS_KEY=" $2
+                                                    print "export AWS_SECRET_ACCESS_KEY=" $2
                                                 }
                                             }
                                         }
@@ -255,15 +263,17 @@ function awsenv() {
 }
 
 # Enable command completion
-complete -C '/home/bevans/.local/bin/aws_completer' aws
-source <(oc completion bash)
-source <(rosa completion bash)
-source <(tkn completion bash)
-source <(crc completion bash)
-source <(kustomize completion bash)
-source <(kube-linter completion bash)
+command -v aws &>/dev/null && complete -C '/home/bevans/.local/bin/aws_completer' aws
+command -v oc &>/dev/null && source <(oc completion bash)
+command -v rosa &>/dev/null && source <(rosa completion bash)
+command -v tkn &>/dev/null && source <(tkn completion bash)
+command -v crc &>/dev/null && source <(crc completion bash)
+command -v kustomize &>/dev/null && source <(kustomize completion bash)
+command -v kube-linter &>/dev/null && source <(kube-linter completion bash)
+command -v stern &>/dev/null && source <(stern --completion=bash)
+command -v terraform &>/dev/null && complete -C /usr/bin/terraform terraform
+command -v helm &>/dev/null && source <(helm completion bash)
 
-source <(stern --completion=bash)
-
-complete -C /usr/bin/terraform terraform
-source <(helm completion bash)
+# Source local bashrc overrides if present
+# shellcheck source=/dev/null
+[ -f ~/.bashrc-local ] && . ~/.bashrc-local
