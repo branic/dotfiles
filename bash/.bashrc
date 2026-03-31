@@ -263,17 +263,47 @@ function awsenv() {
 }
 
 # Enable command completion
-command -v aws &>/dev/null && complete -C '/home/bevans/.local/bin/aws_completer' aws
-command -v oc &>/dev/null && source <(oc completion bash)
-command -v rosa &>/dev/null && source <(rosa completion bash)
-command -v tkn &>/dev/null && source <(tkn completion bash)
-command -v crc &>/dev/null && source <(crc completion bash)
-command -v kustomize &>/dev/null && source <(kustomize completion bash)
-command -v kube-linter &>/dev/null && source <(kube-linter completion bash)
-command -v stern &>/dev/null && source <(stern --completion=bash)
-command -v terraform &>/dev/null && complete -C /usr/bin/terraform terraform
-command -v helm &>/dev/null && source <(helm completion bash)
+if command -v aws &>/dev/null; then
+    complete -C '/home/bevans/.local/bin/aws_completer' aws
+fi
+if command -v oc &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(oc completion bash)
+fi
+if command -v rosa &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(rosa completion bash)
+fi
+if command -v tkn &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(tkn completion bash)
+fi
+if command -v crc &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(crc completion bash)
+fi
+if command -v kustomize &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(kustomize completion bash)
+fi
+if command -v kube-linter &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(kube-linter completion bash)
+fi
+if command -v stern &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(stern --completion=bash)
+fi
+if command -v terraform &>/dev/null; then
+    complete -C /usr/bin/terraform terraform
+fi
+if command -v helm &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(helm completion bash)
+fi
 
 # Source local bashrc overrides if present
 # shellcheck source=/dev/null
-[ -f ~/.bashrc-local ] && . ~/.bashrc-local
+if [ -f ~/.bashrc-local ]; then
+    . ~/.bashrc-local
+fi
