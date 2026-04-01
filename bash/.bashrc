@@ -307,3 +307,46 @@ fi
 if [ -f ~/.bashrc-local ]; then
     . ~/.bashrc-local
 fi
+# BEGIN ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
+#
+# Ansible managed
+#
+if command -v aws &>/dev/null; then
+    complete -C '/home/bevans/.local/bin/aws_completer' aws
+fi
+
+if command -v oc &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(oc completion bash)
+fi
+
+if command -v rosa &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(rosa completion bash)
+fi
+
+if command -v tkn &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(tkn completion bash)
+fi
+
+if command -v kube-linter &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(kube-linter completion bash)
+fi
+
+if command -v kustomize &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(kustomize completion bash)
+fi
+
+if command -v stern &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(stern --completion=bash)
+fi
+
+if command -v helm &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(helm completion bash)
+fi
+# END ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
