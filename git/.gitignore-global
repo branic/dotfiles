@@ -9,3 +9,4 @@ t.sh
 pipelinerun-test.yaml
 job-test.yaml
 .ansible/
+be-test-*

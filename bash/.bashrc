@@ -209,8 +209,8 @@ export AWS_PROFILE=redhat
 function awsenv() {
     local AWS_CRED="default"
 
-    if [ "$1" = "-h" ]
-        then
+    case "$1" in
+        -h|--help)
             echo "Usage: awsenv [aws_profile_name]";
             echo ""
             echo "If aws_profile_name is not provided the value of the environment"
@@ -222,14 +222,15 @@ function awsenv() {
             local avail_profiles
             avail_profiles="$( grep -E '^\[.+\]' ~/.aws/credentials | sed 's/[][]//g' | sed ':a; N; $!ba; s/\n/, /g' )"
             echo "Configured AWS Profiles are: ${avail_profiles}"
-            return 0;
-    elif [ "$1" = "-l" ]
-        then
+            return 0
+            ;;
+        -l|--list)
             local avail_profiles
             avail_profiles="$( grep -E '^\[.+\]' ~/.aws/credentials | sed 's/[][]//g' | sed ':a; N; $!ba; s/\n/, /g' )"
             echo "Configured AWS Profiles are: ${avail_profiles}"
-            return 0;
-    fi
+            return 0
+            ;;
+    esac
 
     if [ $# -eq 0 ]
         then
@@ -238,7 +239,7 @@ function awsenv() {
                     AWS_CRED="$AWS_PROFILE"
             fi
     else
-        AWS_CRED=$1
+        AWS_CRED="$1"
     fi
 
     echo "Setting credentials for profile : ${AWS_CRED}"
@@ -262,51 +263,6 @@ function awsenv() {
     )"
 }
 
-# Enable command completion
-if command -v aws &>/dev/null; then
-    complete -C '/home/bevans/.local/bin/aws_completer' aws
-fi
-if command -v oc &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(oc completion bash)
-fi
-if command -v rosa &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(rosa completion bash)
-fi
-if command -v tkn &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(tkn completion bash)
-fi
-if command -v crc &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(crc completion bash)
-fi
-if command -v kustomize &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(kustomize completion bash)
-fi
-if command -v kube-linter &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(kube-linter completion bash)
-fi
-if command -v stern &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(stern --completion=bash)
-fi
-if command -v terraform &>/dev/null; then
-    complete -C /usr/bin/terraform terraform
-fi
-if command -v helm &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(helm completion bash)
-fi
-
-# Source local bashrc overrides if present
-# shellcheck source=/dev/null
-if [ -f ~/.bashrc-local ]; then
-    . ~/.bashrc-local
-fi
 # BEGIN ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
 #
 # Ansible managed
@@ -350,3 +306,19 @@ if command -v helm &>/dev/null; then
     source <(helm completion bash)
 fi
 # END ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
+
+# BEGIN ANSIBLE MANAGED BLOCK branic.system_management.openshift_local
+#
+# Ansible managed
+#
+if command -v crc &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(crc completion bash)
+fi
+# END ANSIBLE MANAGED BLOCK branic.system_management.openshift_local
+
+# Source local bashrc overrides if present
+# shellcheck source=/dev/null
+if [ -f ~/.bashrc-local ]; then
+    . ~/.bashrc-local
+fi
