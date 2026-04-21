@@ -74,6 +74,7 @@
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
+	stat = true
 [rerere]
 	enabled = true
 	autoupdate = true
