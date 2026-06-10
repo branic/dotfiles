@@ -10,3 +10,5 @@ pipelinerun-test.yaml
 job-test.yaml
 .ansible/
 be-test-*
+
+**/.claude/settings.local.json
