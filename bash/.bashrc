@@ -172,7 +172,7 @@ alias decomment='grep -Ev "^[[:space:]]*((#|;|//).*)?$" '
 
 # Update all remote container images
 function update-images() {
-    for i in $(SUPPRESS_BOLTDB_WARNING=1 podman images --filter reference!=localhost/* --filter dangling=false --noheading --format "{{.Repository}}:{{.Tag}}"); do
+    for i in $(SUPPRESS_BOLTDB_WARNING=1 podman images --filter reference!=localhost/* --filter dangling=false --noheading --format "{{.Repository}}:{{.Tag}}" | grep -v ':<none>$'); do
         echo "Pulling image:  ${i}"
         SUPPRESS_BOLTDB_WARNING=1 podman image pull --quiet --policy=newer ${i} >/dev/null
         echo "  Cleaning up dangling images"
@@ -199,6 +199,17 @@ function rhjira() {
 
     local URL='https://issues.redhat.com/browse/'
     URL+=${1^^}
+    xdg-open "$URL"
+}
+
+function rh-people() {
+    if [ -z "$1" ]; then
+        echo "Usage: rh-people [id]";
+        return 1;
+    fi
+
+    local URL='https://rover.redhat.com/people/profile/'
+    URL+=${1}
     xdg-open "$URL"
 }
 
@@ -274,6 +285,11 @@ fi
 if command -v oc &>/dev/null; then
     # shellcheck source=/dev/null
     source <(oc completion bash)
+fi
+
+if command -v ocm &>/dev/null; then
+    # shellcheck source=/dev/null
+    source <(ocm completion bash)
 fi
 
 if command -v rosa &>/dev/null; then
