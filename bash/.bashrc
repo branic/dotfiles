@@ -274,64 +274,37 @@ function awsenv() {
     )"
 }
 
-# BEGIN ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
-#
-# Ansible managed
-#
+# Lazy-load and cache bash completions on first use
+_lazy_completion() {
+    local cmd=$1; shift
+    local gen_args=("$@")
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/bash_completions/${cmd}.bash"
+    eval "_complete_lazy_${cmd}() {
+        unset -f _complete_lazy_${cmd}
+        complete -r ${cmd} 2>/dev/null
+        if [[ ! -f '${cache}' || \$(command -v ${cmd}) -nt '${cache}' ]]; then
+            mkdir -p '${XDG_CACHE_HOME:-$HOME/.cache}/bash_completions'
+            \"\${gen_args[@]}\" > '${cache}'
+        fi
+        source '${cache}'
+        return 124
+    }"
+    complete -F "_complete_lazy_${cmd}" "$cmd"
+}
+
 if command -v aws &>/dev/null; then
     complete -C '/home/bevans/.local/bin/aws_completer' aws
 fi
 
-if command -v oc &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(oc completion bash)
-fi
-
-if command -v ocm &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(ocm completion bash)
-fi
-
-if command -v rosa &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(rosa completion bash)
-fi
-
-if command -v tkn &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(tkn completion bash)
-fi
-
-if command -v kube-linter &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(kube-linter completion bash)
-fi
-
-if command -v kustomize &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(kustomize completion bash)
-fi
-
-if command -v stern &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(stern --completion=bash)
-fi
-
-if command -v helm &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(helm completion bash)
-fi
-# END ANSIBLE MANAGED BLOCK branic.system_management.install_cloud_clis
-
-# BEGIN ANSIBLE MANAGED BLOCK branic.system_management.openshift_local
-#
-# Ansible managed
-#
-if command -v crc &>/dev/null; then
-    # shellcheck source=/dev/null
-    source <(crc completion bash)
-fi
-# END ANSIBLE MANAGED BLOCK branic.system_management.openshift_local
+command -v oc &>/dev/null && _lazy_completion oc oc completion bash
+command -v ocm &>/dev/null && _lazy_completion ocm ocm completion bash
+command -v rosa &>/dev/null && _lazy_completion rosa rosa completion bash
+command -v tkn &>/dev/null && _lazy_completion tkn tkn completion bash
+command -v kube-linter &>/dev/null && _lazy_completion kube-linter kube-linter completion bash
+command -v kustomize &>/dev/null && _lazy_completion kustomize kustomize completion bash
+command -v stern &>/dev/null && _lazy_completion stern stern --completion=bash
+command -v helm &>/dev/null && _lazy_completion helm helm completion bash
+command -v crc &>/dev/null && _lazy_completion crc crc completion bash
 
 # Source local bashrc overrides if present
 # shellcheck source=/dev/null
